@@ -25,6 +25,24 @@ public class DataSet extends ArrayList<LayerSet> {
         add(set);
         return this;
     }
+    
+     public boolean isCompliant() {
+        for (int i = 0; i < this.size(); i++) {
+            for (int j = 0; j < this.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                LayerSet a = this.get(i);
+                LayerSet b = this.get(j);
+                if(a.getInput().equals(b.getInput())) {
+                    if(!a.getOutput().equals(b.getOutput())) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
     public void save(File file) {
         try {

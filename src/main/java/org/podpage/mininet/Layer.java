@@ -17,11 +17,18 @@ public class Layer extends ArrayList<Double>  {
     public Layer(ArrayList<Double> layerData) {
         addAll(layerData);
     }
+   
+    public Layer round() {
+        return round(10);
+    }
 
-    @Override
-    public String toString() {
-        return "[" + stream().map(Object::toString).collect(Collectors.joining(", "))
-                + "]";
+    public Layer round(double decimal) {
+        double[] data = new double[this.size()];
+
+        for (int i = 0; i < this.size(); i++) {
+            data[i] = Math.round(this.get(i) * decimal) / decimal;
+        }
+        return new Layer(data);
     }
     
     public boolean equals(Layer layer) {
@@ -34,5 +41,11 @@ public class Layer extends ArrayList<Double>  {
             }
         }
         return true;
+    }
+    
+    @Override
+    public String toString() {
+        return "[" + stream().map(Object::toString).collect(Collectors.joining(", "))
+                + "]";
     }
 }

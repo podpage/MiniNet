@@ -23,4 +23,16 @@ public class Layer extends ArrayList<Double>  {
         return "[" + stream().map(Object::toString).collect(Collectors.joining(", "))
                 + "]";
     }
+    
+    public boolean equals(Layer layer) {
+        for (int i = 0; i < this.size(); i++) {
+            double a = this.get(i);
+            double b = layer.get(i);
+
+            if (!(a + 0.0001 > b && a - 0.0001 < b)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
